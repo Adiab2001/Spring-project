@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//lombok/
 @Builder
+//lombok/
 @Entity
 @Table(name = "clubs")
 public class Club {
