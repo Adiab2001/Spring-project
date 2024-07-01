@@ -27,7 +27,8 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
-    public Club saveClub(Club club) {
+    public Club saveClub(ClubDto clubDto) {
+        Club club = mapToClub(clubDto);
         return clubRepo.save(club);
     }
 
@@ -43,17 +44,21 @@ public class ClubServiceImpl implements ClubService {
         clubRepo.save(club);
     }
 
-    private Club mapToClub(ClubDto club){
-        Club clubDto = Club.builder()
-                .id(club.getId())
-                .title(club.getTitle())
-                .photoUrl(club.getPhotoUrl())
-                .content(club.getContent())
-                .createdOn(club.getCreatedOn())
-                .updatedOn(club.getUpdatedOn())
-                .build();
-        return clubDto;
+    private Club mapToClub(ClubDto clubDto) {
+        Club.ClubBuilder builder = Club.builder()
+                .title(clubDto.getTitle())
+                .photoUrl(clubDto.getPhotoUrl())
+                .content(clubDto.getContent())
+                .createdOn(clubDto.getCreatedOn())
+                .updatedOn(clubDto.getUpdatedOn());
+
+        if (clubDto.getId() != null) {
+            builder.id(clubDto.getId());
+        }
+
+        return builder.build();
     }
+
 
     private ClubDto mapToClubDto(Club club){
         ClubDto clubDto = ClubDto.builder()
