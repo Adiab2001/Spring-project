@@ -79,4 +79,11 @@ public class ClubController {
         return "redirect:/clubs";
 
     }
+
+    @GetMapping("/clubs/search")
+    public String searchClub(@RequestParam("query") String query, Model model){
+        List<ClubDto> clubs = clubService.searchClubs(query);
+        model.addAttribute("clubs", clubs);
+        return "clubs-list";
+    }
 }

@@ -50,6 +50,12 @@ public class ClubServiceImpl implements ClubService {
         clubRepo.deleteById(clubId);
     }
 
+    @Override
+    public List<ClubDto> searchClubs(String query) {
+        List<Club> clubs = clubRepo.searchClubs(query);
+        return clubs.stream().map(club -> mapToClubDto(club)).collect(Collectors.toList());
+    }
+
     private Club mapToClub(ClubDto clubDto) {
         Club.ClubBuilder builder = Club.builder()
                 .title(clubDto.getTitle())
