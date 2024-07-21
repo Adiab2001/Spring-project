@@ -1,12 +1,10 @@
 package com.example.web.controller;
 
-import com.example.web.dto.ClubDto;
 import com.example.web.dto.EventDto;
 import com.example.web.models.Event;
 import com.example.web.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,7 +15,7 @@ import java.util.List;
 
 @Controller
 public class EventController {
-    private EventService eventService;
+    private final EventService eventService;
 
     @Autowired
     public EventController(EventService eventService) {
@@ -33,7 +31,7 @@ public class EventController {
     }
 
     @PostMapping("/events/{clubId}")
-    public String createEvent(@PathVariable("clubId") Long clubId, @ModelAttribute("event")EventDto eventDto, Model model){
+    public String createEvent(@PathVariable("clubId") Long clubId, @ModelAttribute("event")EventDto eventDto){
         eventService.createEvent(clubId, eventDto);
         return "redirect:/clubs/" + clubId;
     }
@@ -57,5 +55,11 @@ public class EventController {
         EventDto eventDto = eventService.findById(eventId);
         model.addAttribute("event", eventDto);
         return "events-detail";
+    }
+
+    @GetMapping("/events/{eventId}/delete")
+    public String deleteEvent(@PathVariable("eventId") Long eventId){
+        eventService.deleteEvent(eventId);
+        return "redirect:/events";
     }
 }

@@ -2,7 +2,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}"
       lang="en">
-<head>Event Create</head>
+<head><title>Event Create</title></head>
 <body class="d-flex flex-column">
 
 <section layout:fragment="body" class="py-5">
@@ -21,13 +21,13 @@
             <div class="col-lg-8">
                 <!-- Featured blog post-->
                 <div class="card mb-4">
-                    <a href="#!"><img class="card-img-top" th:src="${event.photoUrl}" alt="..." /></a>
+                    <a href=""><img class="card-img-top" th:src="${event.photoUrl}" alt="..." /></a>
                     <div class="card-body">
                         <div class="small text-muted" th:text="${event.startTime}"></div>
                         <h2 class="card-title">About this Event</h2>
                         <p class="card-text" th:text="${event.endTime}"></p>
-                        <a class="btn btn-primary">Delete</a>
-                        <a class="btn btn-primary">Create Event</a>
+                        <a class="btn btn-primary" th:href="@{/events/{eventId}/delete(eventId=${event.id})}">Delete</a>
+
                     </div>
                 </div>
 
@@ -51,9 +51,9 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">Road runner</a></li>
-                                    <li><a href="#!">Trail</a></li>
-                                    <li><a href="#!">Marathon</a></li>
+                                    <li><a href="">Road runner</a></li>
+                                    <li><a href="">Trail</a></li>
+                                    <li><a href="">Marathon</a></li>
                                 </ul>
                             </div>
                         </div>
